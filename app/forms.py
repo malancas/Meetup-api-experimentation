@@ -1,7 +1,7 @@
 from flask_wtf import Form
 from wtforms import StringField
-from wtforms.validators import DataRequired, Length, ValidationError
-import re
+from wtforms.validators import InputRequired, Length, ValidationError
+import datetime
 
 def isValidInteger(form, field):
     try:
@@ -10,12 +10,20 @@ def isValidInteger(form, field):
         raise ValidationError('Field must be of valid zipcode format')
 
 def validateDateFormat(form, field):
-    dateRegEx = '/^(0[1-9]|1[012]|[1-9])[- /.](0[1-9]|[12][0-9]|3[01]|[1-9])[- /.](19|20)\d\d$/'
+    try:
+        datetime.datetime.strptime(field.data, '%Y-%m-%d')
 
-    if not re.match(dateRegEx, field.data):
+    except ValueError:
+        print("CAUGHT BAD ERROR")
         raise ValidationError('Date must be in mm/dd/yyyy format')
 
+def datesArePossible(form, field, startDate):
+    if field.data.date.replace('/', '') < startDate.replace('/', ''):
+        raise ValidationError('End date can\'t be predate the start date')
+
 class SearchForm(Form):
-    zipcode = StringField('zipcode', validators=[DataRequired(), Length(min=5, max=7), isValidInteger])
-    startDate = StringField('startDate', validators=[DataRequired()])
-    endDate = StringField('endDate', validators=[DataRequired()])
+    zipcode = StringField('zipcode', validators=[InputRequired(), Length(min=5, max=7), isValidInteger])
+
+    startDate = StringField('startDate', validators=[InputRequired(), validateDateFormat])
+    endDate = StringField('endDate', validators=[InputRequired(), validateDateFormat])
+    

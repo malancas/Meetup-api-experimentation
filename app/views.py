@@ -1,4 +1,4 @@
-from flask import render_template, redirect, flash
+from flask import render_template, redirect, flash, request
 from app import app
 from .forms import SearchForm
 import requests
@@ -10,7 +10,6 @@ Use categories of subscribed groups
 to find similar groups in the given area code
 '''
 
-
 @app.route('/')
 @app.route('/index')
 def index():
@@ -21,10 +20,8 @@ def index():
                            user=user, cats=cats.json())
 @app.route('/search', methods=['GET', 'POST'])
 def search():
-    form = SearchForm()
+    form = SearchForm(request.form)
     if form.validate_on_submit():
-        flash('Zipcode requested for zipcode="%s"' %
-              (form.zipcode.data))
         return redirect('/index')
     return render_template('search.html', 
                            title='Search',

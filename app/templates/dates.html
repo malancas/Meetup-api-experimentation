@@ -2,19 +2,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h1>Enter zipcode</h1>
-  <form action="" method="post" name="zipcode">
-    {{ form.hidden_tag() }}
-      <p>
-          Enter the zipcode of where you'll be staying:<br>
-          {{ form.zipcode(size=80) }}<br>
-          {% for error in form.zipcode.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-          {% endfor %}<br>
-      </p>
-  </form>
-
-  <h1>Enter the dates you'll be in town</h1>
+  <h1>Enter dates you'll be in town</h1>
   <form action="" method="post" name="startDate">
     {{ form.hidden_tag() }}
     <p>
@@ -25,7 +13,9 @@
       {% endfor %}<br>
     </p>
   </form>
+{% endblock %}
 
+{% block content %}
   <form action="" method="post" name="endDate">
     {{ form.hidden_tag() }}
     <p>
