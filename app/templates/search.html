@@ -1,39 +1,31 @@
-<!-- extend from base layout -->
+<!-- extend base layout -->
 {% extends "base.html" %}
 
 {% block content %}
-  <h1>Enter zipcode</h1>
-  <form action="" method="post" name="zipcode">
-    {{ form.hidden_tag() }}
+  <h1>Search for meetup</h1>
+  <form action="" method="post" name="search">
+      {{ form.hidden_tag() }}
       <p>
-          Enter the zipcode of where you'll be staying:<br>
+          Please enter the zipcode you will be in:<br>
           {{ form.zipcode(size=80) }}<br>
           {% for error in form.zipcode.errors %}
             <span style="color: red;">[{{ error }}]</span>
           {% endfor %}<br>
       </p>
-  </form>
-
-  <h1>Enter the dates you'll be in town</h1>
-  <form action="" method="post" name="startDate">
-    {{ form.hidden_tag() }}
-    <p>
-      Enter the start day you'll be available in mm/dd/yy format:<br>
-      {{ form.startDate(size=80) }}<br>
-      {% for error in form.startDate.errors %}
-      <span style="color: red;">[{{ error }}]</span>
-      {% endfor %}<br>
-    </p>
-  </form>
-
-  <form action="" method="post" name="endDate">
-    {{ form.hidden_tag() }}
-    <p>
-      Enter the last full full day in mm/dd/yy format:<br>
-      {{ form.endDate(size=80) }}<br>
-      {% for error in form.endDate.errors %}
-        <span style="color: red;">[{{ error }}]</span>
-      {% endfor %}<br>
-    </p>
+      <p>
+        Please enter the first date you'll be available:<br>
+        {{ form.startDate(size=80) }}<br>
+        {% for error in form.startDate.errors %}
+          <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}<br>
+      </p>
+      <p>
+        Please enter the last date you'll be available:<br>
+        {{ form.endDate(size=80) }}<br>
+        {% for error in form.startDate.errors %}
+          <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}<br>
+      </p>
+      <p><input type="submit" value="Sign In"></p>
   </form>
 {% endblock %}
