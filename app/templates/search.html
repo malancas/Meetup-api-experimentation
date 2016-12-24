@@ -2,7 +2,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h1>Search for meetup</h1>
+  <h1>Search for meetups</h1>
   <form action="" method="post" name="search">
       {{ form.hidden_tag() }}
       <p>
@@ -26,6 +26,6 @@
           <span style="color: red;">[{{ error }}]</span>
         {% endfor %}<br>
       </p>
-      <p><input type="submit" value="Sign In"></p>
+      <p><input type="submit" value="Search"></p>
   </form>
 {% endblock %}
