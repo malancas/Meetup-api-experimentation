@@ -2,7 +2,7 @@
 
 ### This is a small web app that uses the Meetup and Google Maps API to explore how the former API can be used to help meetup users find events when they are visiting cities on business trips or vacation
 
-To quickstart, run the run.py file and direct your browser to https://localhost:5000/search
+To quickstart, run the run.py file and direct your browser to http://localhost:5000/search
 
 Enter the zipcode of the city you'll be visiting and the dates you will be available in the format yyyy-mm-dd
 

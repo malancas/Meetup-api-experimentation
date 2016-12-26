@@ -13,14 +13,14 @@
           {% endfor %}<br>
       </p>
       <p>
-        Please enter the first date you'll be available:<br>
+        Please enter the first date you'll be available in yyyy-mm-dd format:<br>
         {{ form.startDate(size=80) }}<br>
         {% for error in form.startDate.errors %}
           <span style="color: red;">[{{ error }}]</span>
         {% endfor %}<br>
       </p>
       <p>
-        Please enter the last date you'll be available:<br>
+        Please enter the last date you'll be available in yyyy-mm-dd format:<br>
         {{ form.endDate(size=80) }}<br>
         {% for error in form.startDate.errors %}
           <span style="color: red;">[{{ error }}]</span>

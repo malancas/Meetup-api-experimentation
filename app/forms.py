@@ -15,7 +15,7 @@ def validateDateFormat(form, field):
 
     except ValueError:
         print("CAUGHT BAD ERROR")
-        raise ValidationError('Date must be in mm/dd/yyyy format')
+        raise ValidationError('Date must be in yyyy-mm-dd format')
 
 def datesArePossible(form, field, startDate):
     if field.data.date.replace('/', '') < startDate.replace('/', ''):
