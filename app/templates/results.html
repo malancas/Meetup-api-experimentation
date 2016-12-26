@@ -5,7 +5,12 @@
   <div><center><h1>Upcoming meetups</h1></center></div>
   {% for event in events %}
     <center><h2>{{ event["name"] }}</h2></center>
-    <center><p>{{ event["time"] }}</p></center>
-    <center><p>{ event["description"] }}</p></center>
+    <% import time
+       print(time.strftime('%Y-%m-%d %H:%M:%S', time.localtime( {{ event["time"] }} )))
+    %>
+    {% if "venue" in event %}
+      <center><p>Hosted at {{ event["venue"]["name"] }}</p></center>
+    {% endif %}
+    <center>{{ event["description"] }}</center><br>
   {% endfor %}
 {% endblock %}
