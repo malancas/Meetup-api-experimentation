@@ -30,22 +30,28 @@ def search():
                            form=form)
 
 def results(form):
-    #groups = requests.get("https://api.meetup.com/find/groups?key=50435526d4215731a6973f07d5d50&sign=true")
     # Use the Google Maps API to grab information about the city corresponding to the zipcode given.
-    cityData = requests.get("https://maps.googleapis.com/maps/api/geocode/json?address={}".format(form.zipcode))
-    cityData = cityData.json()
+    payload = {'address': '10514'}
+    cityData = requests.get("https://maps.googleapis.com/maps/api/geocode/json", payload).json()
 
+    lat = str(cityData['results'][0]['geometry']['location']['lat'])
+    lng = str(cityData['results'][0]['geometry']['location']['lng'])
+    
     # Can use latitude and longitude data in the cityData result to search for local events
-    events = requests.get("https://api.meetup.com/find/events?&lon={}&lat={1}&key=50435526d4215731a6973f07d5d50&sign=true&photo-host=public".format(cityData.geometry.lng, cityData.geometry.lat)).json()
+    payload = {'lat': lat, 'lon': lng, 'key': '50435526d4215731a6973f07d5d50', 'sign': 'true'}
+    events = requests.get("https://api.meetup.com/find/events", payload).json()
 
     # Convert given dates to UTC time to find events
-    startDate = form.startDate.split('-','')
-    endDate = form.endDate.split('-','')
+    startDate = form.startDate.data.split('-',3)
+    startDate = [int(num) for num in startDate]
+    endDate = form.endDate.data.split('-',3)
+    endDate = [int(num) for num in endDate]
+
     utcStart = datetime(startDate[0], startDate[1], startDate[2]).timestamp()
-    utcEnd = datetime(startDate[0], startDate[1], startDate[2]).timestamp()
+    utcEnd = datetime(endDate[0], endDate[1], endDate[2]).timestamp()
     availableEvents = []
     for event in events:
-        if utcStart <= event.time <= utcEnd:
+        if utcStart <= float(event['time']) <= utcEnd:
             availableEvents.append(event)
 
     return render_template('results.html',

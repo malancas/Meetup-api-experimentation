@@ -7,3 +7,5 @@ To quickstart, run the run.py file and direct your browser to https://localhost:
 Enter the zipcode of the city you'll be visiting and the dates you will be available in the format yyyy-mm-dd
 
 The app will then redirect to https://results to display a list of events happening in that area code during the dates enetered.
+
+Dependency list: flask, flask-wtf
