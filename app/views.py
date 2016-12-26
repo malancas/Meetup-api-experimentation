@@ -31,7 +31,7 @@ def search():
 
 def results(form):
     # Use the Google Maps API to grab information about the city corresponding to the zipcode given.
-    payload = {'address': '10514'}
+    payload = {'address': form.zipcode.data}
     cityData = requests.get("https://maps.googleapis.com/maps/api/geocode/json", payload).json()
 
     lat = str(cityData['results'][0]['geometry']['location']['lat'])
@@ -49,8 +49,6 @@ def results(form):
 
     utcStart = datetime(startDate[0], startDate[1], startDate[2]).timestamp() * 1000
     utcEnd = datetime(endDate[0], endDate[1], endDate[2]).timestamp() * 1000
-    print('START: ', utcStart)
-    print('END: ', utcEnd)
     availableEvents = []
     for event in events:
         if utcStart <= float(event['time']) <= utcEnd:
