@@ -2,8 +2,10 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h1>Resulting meetups</h1>
-  <form action="" method="get" name="results">
-    <p>{{ events }}</p>
-  </form>
+  <div><center><h1>Upcoming meetups</h1></center></div>
+  {% for event in events %}
+    <center><h2>{{ event["name"] }}</h2></center>
+    <center><p>{{ event["time"] }}</p></center>
+    <center><p>{ event["description"] }}</p></center>
+  {% endfor %}
 {% endblock %}
