@@ -47,8 +47,10 @@ def results(form):
     endDate = form.endDate.data.split('-',3)
     endDate = [int(num) for num in endDate]
 
-    utcStart = datetime(startDate[0], startDate[1], startDate[2]).timestamp()
-    utcEnd = datetime(endDate[0], endDate[1], endDate[2]).timestamp()
+    utcStart = datetime(startDate[0], startDate[1], startDate[2]).timestamp() * 1000
+    utcEnd = datetime(endDate[0], endDate[1], endDate[2]).timestamp() * 1000
+    print('START: ', utcStart)
+    print('END: ', utcEnd)
     availableEvents = []
     for event in events:
         if utcStart <= float(event['time']) <= utcEnd:
