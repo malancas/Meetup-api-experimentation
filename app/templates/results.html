@@ -9,6 +9,6 @@
     {% if "venue" in event %}
       <center><p>Hosted at {{ event["venue"]["name"] }}</p></center>
     {% endif %}
-    <center><p>{{ event["description"] }}</p></center><br>
+    <center><p>{{ event["description"]|safe }}</p></center><br>
   {% endfor %}
 {% endblock %}
