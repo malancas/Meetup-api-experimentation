@@ -12,13 +12,6 @@ to find similar groups in the given area code
 '''
 
 @app.route('/')
-@app.route('/index')
-def index():
-    cats = requests.get("https://api.meetup.com/2/categories?key=50435526d4215731a6973f07d5d50&sign=true")
-    user = {'nickname': 'Meredith'}
-    return render_template('index.html',
-                           title='Home',
-                           user=user, cats=cats.json())
 
 @app.route('/search', methods=['GET', 'POST'])
 def search():
