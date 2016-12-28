@@ -15,13 +15,15 @@
 yourmachine:~$ git clone https://github.com/malancas/Meetup-api-experimentation.git
 ```
 
-### 2. Execute the ***run.py*** file.
+### 2. Change the python path at the top of ***run.py*** to the appropriate path on your machine
+
+### 3. Execute the ***run.py*** file.
 
 ```Bash
 yourmachine:~$ python run.py
 ```
 
-### 3. Direct your browser to http://localhost:5000/search. 
+### 4. Direct your browser to http://localhost:5000/search. 
 - Enter the zipcode of your location
 - Enter your start and end dates for availability in the format ***yyyy-mm-dd***
 - Select event categories that interest you
