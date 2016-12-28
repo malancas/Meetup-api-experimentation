@@ -1,4 +1,3 @@
 {
-  "test_app.py::MyTestCase::test1": true,
-  "test_app.py::test_isValidInteger": true
+  "test_app.py::AppTestCase::test_isValidInteger": true
 }

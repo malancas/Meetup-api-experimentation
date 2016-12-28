@@ -1,4 +1,4 @@
-# Experimenting with the Meetup API - Meetup on Vacation
+# Experimenting with the Meetup API - Meetup on Vacation, Business, etc.
 
 ### This is a small web app that uses the Meetup API to explore how it can be used to help meetup users find events when they are visiting cities on business trips or vacation. The idea behind it was to encourage those who may be visiting to check out the local communities of their choosing. It could also be used by those considering moving to a new area to scout out communities they may be interested in. I also considered how it could be used to encourage cross country or international networking. While this is implemented as a web app, it seems like a feature that could be added to the mobile app or website.
 
