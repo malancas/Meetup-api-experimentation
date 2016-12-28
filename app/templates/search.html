@@ -30,7 +30,7 @@
         Please choose the categories you're interested in:<br>
         <select multiple id="selectcategories" name="selectcategories">
           {% for category in categories %}
-            <option value={{ category[0] }}>{{ category[0] }}</option>   
+            <option value="{{ category }}">{{ category }}</option>   
           {% endfor %}
         </select>
       </center><br>
