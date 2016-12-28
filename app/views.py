@@ -15,12 +15,21 @@ to find similar groups in the given area code
 
 @app.route('/search', methods=['GET', 'POST'])
 def search():
+    payload = {'key': '50435526d4215731a6973f07d5d50', 'sign': 'true'}
+    jsonCategories = requests.get("https://api.meetup.com/2/categories", payload).json()
+    jsonCategories = jsonCategories["results"]
+
+    categories = []
+    for jsonCategory in jsonCategories:
+        categories.append([jsonCategory["name"], jsonCategory["id"]])
+
     form = SearchForm(request.form)
+    form.categories.choices = categories
     if form.validate_on_submit():
         return results(form)
     return render_template('search.html', 
                            title='Search',
-                           form=form)
+                           form=form, categories=categories)
 
 def results(form):
     # Use the Google Maps API to grab information about the city corresponding to the zipcode given.
@@ -30,9 +39,21 @@ def results(form):
     lat = str(cityData['results'][0]['geometry']['location']['lat'])
     lng = str(cityData['results'][0]['geometry']['location']['lng'])
     
+    categories = request.form.getlist('selectcategories')
+    #categories = form.categories.data
+    print('CATEGORIES: ', categories)
+
     # Can use latitude and longitude data in the cityData result to search for local events
-    payload = {'lat': lat, 'lon': lng, 'key': '50435526d4215731a6973f07d5d50', 'sign': 'true'}
-    events = requests.get("https://api.meetup.com/find/events", payload).json()
+    chosenCategories = ''
+    print('CATEGORIES')
+    for index, category in enumerate(categories):
+        print(category)
+        chosenCategories += (str(category[1])+',')
+
+    payload = {'zip': form.zipcode.data, 'categories': chosenCategories, 'key': '50435526d4215731a6973f07d5d50', 'sign': 'true'}
+    open_events = requests.get("https://api.meetup.com/2/open_events", payload).json()
+    if open_events:
+        open_events = open_events["results"]
 
     # Convert given dates to UTC time to find events
     startDate = form.startDate.data.split('-',3)
@@ -42,8 +63,9 @@ def results(form):
 
     utcStart = datetime(startDate[0], startDate[1], startDate[2]).timestamp() * 1000
     utcEnd = datetime(endDate[0], endDate[1], endDate[2]).timestamp() * 1000
+
     availableEvents = []
-    for event in events:
+    for event in open_events:
         if utcStart <= float(event['time']) <= utcEnd:
             availableEvents.append(event)
 

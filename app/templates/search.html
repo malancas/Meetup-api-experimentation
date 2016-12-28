@@ -26,6 +26,14 @@
           <span style="color: red;">[{{ error }}]</span>
         {% endfor %}<br>
       </center>
+      <center>
+        Please choose the categories you're interested in:<br>
+        <select multiple id="selectcategories" name="selectcategories">
+          {% for category in categories %}
+            <option value={{ category[0] }}>{{ category[0] }}</option>   
+          {% endfor %}
+        </select>
+      </center><br>
       <center><input type="submit" value="Find meetups!"></center>
   </form>
 {% endblock %}
