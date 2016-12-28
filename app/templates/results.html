@@ -5,7 +5,7 @@
   <div><center><h1>Upcoming meetups</h1></center></div>
   {% for event in events %}
     <center><h2>{{ event["name"] }}</h2></center>
-    <center><p>{{ convertUtcToDate(event["time"] + event["utc_offset"]) }}</p></center>
+    <center><p>{{ convertUtcToDate(event["time"], event["utc_offset"]) }}</p></center>
     {% if "venue" in event %}
       <center><p>Hosted at {{ event["venue"]["name"] }}</p></center>
     {% endif %}

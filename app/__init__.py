@@ -6,7 +6,8 @@ app.config.from_object('config')
 from app import views
 
 import time
-def convertUtcToDate(utcTime):
-    return time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(utcTime))
+import datetime
+def convertUtcToDate(utcTime, utcOffset):
+    return time.strftime('%m-%d-%Y %I:%M %p', time.gmtime((utcTime+utcOffset) / 1000.0))
 
 app.jinja_env.globals.update(convertUtcToDate=convertUtcToDate)

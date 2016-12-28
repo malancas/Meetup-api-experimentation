@@ -36,13 +36,6 @@ def search():
                            form=form, categories=categories)
 
 def results(form, categoryDict):
-    # Use the Google Maps API to grab information about the city corresponding to the zipcode given.
-    payload = {'address': form.zipcode.data}
-    cityData = requests.get("https://maps.googleapis.com/maps/api/geocode/json", payload).json()
-
-    lat = str(cityData['results'][0]['geometry']['location']['lat'])
-    lng = str(cityData['results'][0]['geometry']['location']['lng'])
-    
     categories = request.form.getlist('selectcategories')
 
     # Can use latitude and longitude data in the cityData result to search for local events
@@ -61,7 +54,7 @@ def results(form, categoryDict):
     utcEnd = datetime(endDate[0], endDate[1], endDate[2]).timestamp() * 1000
 
     timeRange = str(int(utcStart)) + ',' + str(int(utcEnd))
-
+    #print('TIMERANGE: ', timeRange)
 
     payload = {'zip': form.zipcode.data, 'category': chosenCategories, 'time': timeRange,  'key': '50435526d4215731a6973f07d5d50', 'sign': 'true'}
     open_events = requests.get("https://api.meetup.com/2/open_events", payload).json()
@@ -71,8 +64,7 @@ def results(form, categoryDict):
 
     availableEvents = []
     for event in open_events:
-        if utcStart <= float(event['time']) <= utcEnd:
-            availableEvents.append(event)
+        availableEvents.append(event)
 
     return render_template('results.html',
                            title='Meetup results',
