@@ -9,6 +9,10 @@
     {% if "venue" in event %}
       <center><p>Hosted at {{ event["venue"]["name"] }}</p></center>
     {% endif %}
+    <center><a href = {{ event["event_url"] }}>View this event on Meetup.com!</a>
     <center><p>{{ event["description"]|safe }}</p></center><br>
   {% endfor %}
+  {% if not events %}
+    <center><h2>No upcoming meetups match your criteria!</h2></center>
+  {% endif %}
 {% endblock %}
