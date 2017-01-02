@@ -9,7 +9,7 @@ import requests
 @app.route('/search', methods=['GET', 'POST'])
 def search():
     # Get all event categories in json object format and store them in a list
-    payload = {'key': '50435526d4215731a6973f07d5d50', 'sign': 'true'}
+    payload = {'key': 'x', 'sign': 'true'}
     jsonCategories = requests.get("https://api.meetup.com/2/categories", payload).json()
     jsonCategories = jsonCategories["results"]
 
@@ -58,7 +58,7 @@ def results(form, categoryDict):
     # to be used in the payload of the open_events api call
     timeRange = str(int(utcStart)) + ',' + str(int(utcEnd))
 
-    payload = {'zip': form.zipcode.data, 'category': chosenCategories, 'time': timeRange,  'key': '50435526d4215731a6973f07d5d50', 'sign': 'true'}
+    payload = {'zip': form.zipcode.data, 'category': chosenCategories, 'time': timeRange,  'key': 'x', 'sign': 'true'}
     open_events = requests.get("https://api.meetup.com/2/open_events", payload).json()
 
     # If the result isn't empty, reset open_events to the list
