@@ -3,13 +3,17 @@ from app import app
 from .forms import SearchForm
 from datetime import datetime
 import requests
+import configparser
 
 @app.route('/')
 
 @app.route('/search', methods=['GET', 'POST'])
 def search():
+    config = configparser.ConfigParser()
+    fn = os.path.join(os.path.dirname(__file__), 'config.py')
+    config.read(fn)
     # Get all event categories in json object format and store them in a list
-    payload = {'key': 'x', 'sign': 'true'}
+    payload = {'key': config['apiKey'], 'sign': 'true'}
     jsonCategories = requests.get("https://api.meetup.com/2/categories", payload).json()
     jsonCategories = jsonCategories["results"]
 

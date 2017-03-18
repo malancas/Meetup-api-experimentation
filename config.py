@@ -1,2 +1,3 @@
 WTF_CSRF_ENABLED = True
 SECRET_KEY = 'meetup-time'
+apiKey = '50435526d4215731a6973f07d5d50' 
